@@ -1,0 +1,39 @@
+.chat{
+    width: 100%;
+}
+
+.top{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #247fcf;
+    position: fixed;
+    top: 0;
+    width: 78%;
+    overflow: hidden;
+}
+
+.chat-user{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+
+.avatar{
+    border: 1px solid rgb(209, 208, 208);
+    margin-right: 5px;
+}
+
+.down{
+    display: flex;
+    flex-direction: column;
+    float: right;
+    margin-right: 4%;
+    top: 200px;
+    /* overflow: hidden; */
+    margin-right: 150px;
+}
