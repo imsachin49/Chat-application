@@ -36,9 +36,9 @@ const Message = ({message}) => {
   },[message])
 
   return (
-    <div className='allmsg'>
+    <div className='allmsg' ref={ref}>
       <div className='message'>
-        <div style={{display:'flex',alignItems:'center',flexDirection:'column'}} className='msgdiv' ref={ref}>
+        <div style={{display:'flex',alignItems:'center',flexDirection:'column'}} className='msgdiv'>
           <div style={{display:'flex',alignItems:'center',flexDirection:'column',marginTop:'100px'}} >
             {message.img && <img src={message.img} alt='send picture' style={{borderRadius:'10px',height:'250px',width:'300px'}} />}<br/>
             <div style={{display:'flex',flexDirection:'row',alignItems:'center',marginTop:'-35px'}}>

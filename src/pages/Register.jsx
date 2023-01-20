@@ -80,10 +80,10 @@ const Register = () => {
           </div>
 
           <div className='form-group'>
-            <label htmlFor='file' id='myfilelabel'>
+            {/* <label htmlFor='file' id='myfilelabel'>
               ProfilePicture
-            </label>
-            <input type='file' name='file' id='file' onChange={(e)=>setFile(e.target.files[0])} required />
+            </label> */}
+            <input type='file' name='file' id='files' onChange={(e)=>setFile(e.target.files[0])} required />
           </div>
 
           <div className='form-group'>       
