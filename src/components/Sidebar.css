@@ -1,7 +1,7 @@
 .side{
     border-right: 1px solid rgb(207, 205, 205);
     overflow: auto;
-    /* overflow-x: hidden; */
+    overflow: hidden;
 }
 
 .wrap{
@@ -10,7 +10,9 @@
     overflow-x: hidden;
     position: fixed;
     width: 300px;
+    width: 23%;
     background-color: aliceblue;
+    /* width: 100%; */
 }
 
 .wrap::-webkit-scrollbar{
@@ -48,6 +50,7 @@
         background-color: #0a67b8;
         color: white;
         /* position: fixed; */
+        width: 100%;
 
     }
 
@@ -162,6 +165,7 @@
     justify-content: center;
     height: 60px;
     border-right:5px solid grey;
+    width: 100%;
 }
 
 .for-content{
@@ -180,3 +184,19 @@
     border-radius: 50%;
     box-shadow: rgba(153, 152, 152, 0.35) 0px 5px 15px;
 }
+
+@media screen and (max-width:1308px){
+    .wrap{
+        width: 30%;
+    }
+}
+
+@media screen and (max-width:1058px){
+    .wrap{
+        width: 35%;
+    }
+}
+    
+/* } */
+
+/* Hosting URL: https://my-chat-app-37d5f.web.app */

@@ -51,7 +51,7 @@ const Sidebar = () => {
       e.code==="Enter" 
       && handleSearch()
     }
-
+    
     const handleClickOfsearch=()=>{
       console.log("clicked")
     }
@@ -159,13 +159,12 @@ const Sidebar = () => {
             <img alt="no pic" src={currentUser.photoURL} style={{borderColor:'#0a67b8'}} />
             <h3 className='currentName'>{currentUser.displayName}</h3>
             <Button variant='contained' style={{backgroundColor:'black',color:'white',margin:'2px',margin:'0px 20px',marginLeft:'40px',padding:'2px'}} onClick={handleLogout} >Logout</Button>
-            
           </div>
         </div>
         
         <div id='search' style={{border:'1px solid #d7d7d7',borderRadius:'20px',marginTop:'6px',marginBottom:'6px',padding:'5px 0px'}} >
           <SearchIcon style={{padding:'0px 10px'}}/>
-          <input type='text' placeholder='SEARCH' style={{padding:'0% 1%',fontWeight:'bold',fontFamily:'cursive',height:'35px',width:'100%',outline:'none',borderRadius:'20px',border:'none'}} value={search} onKeyDown={handleKey} onChange={e=>setSearch(e.target.value)} onClick={handleClickOfsearch} />
+          <input type='text' placeholder='SEARCH (Hii or test account)' style={{padding:'0% 1%',fontWeight:'bold',fontFamily:'cursive',height:'35px',width:'100%',outline:'none',borderRadius:'20px',border:'none'}} value={search} onKeyDown={handleKey} onChange={e=>setSearch(e.target.value)} onClick={handleClickOfsearch} />
         </div>
 
         {user && <div className='Nav__item' onClick={handleSelect} style={{border:'1px solid grey',marginBottom:'3px'}}>
@@ -192,7 +191,7 @@ const Sidebar = () => {
           console.log(tdd); */}
           
 
-          return (<div className='Nav__item' key={chat[0]} style={{marginBottom:'1px'}} >
+          return (<div className='Nav__item' key={chat[0]} style={{marginBottom:'1px'}} onClick={()=>handleSelectUserChat(chat[1].userInfo)}>
            {chat[1].userInfo?.photoURL && <img alt="no pic" src={chat[1].userInfo.photoURL} style={{marginLeft:'10px'}} />}
            <p className='mname'> {chat[1].userInfo?.displayName && <b>{chat[1].userInfo.displayName}</b>} <br/> 
             <span style={{color:'grey',fontWeight:'bolder'}}>{chat[1].lastMessage?.text ? chat[1].lastMessage?.text.substr(0,13) : "..."}</span></p>
@@ -206,3 +205,5 @@ const Sidebar = () => {
 }
 
 export default Sidebar
+
+// Hosting URL: https://my-chat-app-37d5f.web.app

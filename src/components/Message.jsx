@@ -38,6 +38,7 @@ const Message = ({message}) => {
   if(currentUser.uid===message.senderId){
     isOtherUser=false;
   }
+  console.log("this is isOtherUser");
   console.log(isOtherUser)
 
   // const ref=useRef();
@@ -57,7 +58,8 @@ const Message = ({message}) => {
             <div style={{display:'flex',flexDirection:'row',alignItems:'center',wordWrap:'break-word'}}>
               <img className='imgs' src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL} height='17px' style={{borderRadius:'50%',backgroundColor:'black'}} /> 
               {/* {message.img && <img src={message.img} alt='send picture' style={{borderRadius:'10px',height:'fitContent',width:'fitContent',margin:'20px 0px'}} />} */}
-              <p className='mymsg'>{message.text}<p className='tym'>just</p></p>
+              {isOtherUser && <p className='mymsg'>{message.text}<p className='tym'>just</p></p>}
+              {!isOtherUser && <p className='mymsg1'>{message.text}<p className='tym1'>just</p></p>}
             </div>
           </div>
 {/* 
