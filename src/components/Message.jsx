@@ -25,25 +25,39 @@ import {v4 as uui} from 'uuid';
 import { ref, uploadBytesResumable,getDownloadURL } from "firebase/storage";
 import {storage} from '../firebase';
 import {arrayUnion, Timestamp, updateDoc} from "firebase/firestore";
+import { ChatContext } from '../context/ChatContext';
+import TelegramIcon from '@mui/icons-material/Telegram';
 
 const Message = ({message}) => {
   const {currentUser}=useContext(AuthContext);
-  const {data}=useContext(AuthContext);
-  
-  const ref=useRef();
-  useEffect(()=>{
-    ref.current?.scrollIntoView({behavior:'smooth'})
-  },[message])
+  const {data}=useContext(ChatContext);
+  console.log("this is daTA");
+  console.log(data);
+
+  let isOtherUser=true;
+  if(currentUser.uid===message.senderId){
+    isOtherUser=false;
+  }
+  console.log(isOtherUser)
+
+  // const ref=useRef();
+  // useEffect(()=>{
+    // ref.current?.scrollIntoView({behavior:'smooth'})
+  // },[message])
 
   return (
-    <div className='allmsg' ref={ref}>
+    <div className='allmsg'>
       <div className='message'>
+    {/* <div className='allmsg'> */}
+      {/* <div className='message' ref={ref}> */}
         <div style={{display:'flex',alignItems:'center',flexDirection:'column'}} className='msgdiv'>
-          <div style={{display:'flex',alignItems:'center',flexDirection:'column',marginTop:'100px'}} >
-            {message.img && <img src={message.img} alt='send picture' style={{borderRadius:'10px',height:'250px',width:'300px'}} />}<br/>
-            <div style={{display:'flex',flexDirection:'row',alignItems:'center',marginTop:'-35px'}}>
-              <img className='imgs' src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL} height='32px' style={{borderRadius:'50%'}} /> 
-              <p className='mymsg'>{message.text}</p>
+        <div class="left-point"></div>
+          <div style={{display:'flex',justifyContent:'center',flexDirection:'column',width:'400px'}}>
+            {message.img && <img src={message.img} alt='send picture' style={{borderRadius:'10px',height:'fitContent',width:'fitContent',margin:'20px 0px'}} />}
+            <div style={{display:'flex',flexDirection:'row',alignItems:'center',wordWrap:'break-word'}}>
+              <img className='imgs' src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL} height='17px' style={{borderRadius:'50%',backgroundColor:'black'}} /> 
+              {/* {message.img && <img src={message.img} alt='send picture' style={{borderRadius:'10px',height:'fitContent',width:'fitContent',margin:'20px 0px'}} />} */}
+              <p className='mymsg'>{message.text}<p className='tym'>just</p></p>
             </div>
           </div>
 {/* 

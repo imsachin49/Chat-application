@@ -1,17 +1,24 @@
 .chat{
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
 }
 
 .top{
     display: flex;
     flex-direction:row;
-    justify-content: space-between;
     align-items: center;
-    background-color: #247fcf;
+    background-color: #7dadd6;
     position: fixed;
     top: 0;
-    width: 78%;
-    overflow: hidden;
+    width:78%;
+    justify-content: space-between;
+    height: 60px;
+    z-index: 1;
+    box-shadow: 0 8px 16px 0 rgba(202, 202, 202, 0.2), 0 6px 20px 0 rgba(182, 182, 182, 0.19);
+    
 }
 
 .chat-user{
@@ -20,12 +27,21 @@
     justify-content:center;
     align-items: center;
     font-weight: bolder;
-    margin-left: 20px;
+}
+
+.chat-media{
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid red; */
 }
 
 .avatar{
-    border: 1px solid rgb(209, 208, 208);
-    margin-right: 5px;
+    /* border: 1px solid rgb(209, 208, 208); */
+    margin-right: 10px;
+    margin-left: 10px;
+    text-transform: capitalize;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
 }
 
 .down{
@@ -34,6 +50,13 @@
     float: right;
     margin-right: 4%;
     top: 200px;
-    /* overflow: hidden; */
-    margin-right: 150px;
+    margin-top: 70px;
+    margin-bottom: 200px;
+    right: 0;
+    /* border: 1px solid red; */
+}
+
+.write-style{
+    display: flex;
+    justify-content: center;
 }

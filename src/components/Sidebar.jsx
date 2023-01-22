@@ -1,7 +1,7 @@
 import React from 'react'
 import './Sidebar.css'
 import { useState } from 'react';
-import { Divider } from '@mui/material'
+import Divider from '@mui/material/Divider';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
@@ -20,6 +20,9 @@ import {serverTimestamp} from "firebase/firestore";
 import { useEffect } from 'react';
 import { onSnapshot } from "firebase/firestore";
 import { ChatContext } from '../context/ChatContext';
+import { type } from '@testing-library/user-event/dist/type';
+import { IconButton } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Sidebar = () => {
   const {currentUser}=useContext(AuthContext);
@@ -133,10 +136,15 @@ const Sidebar = () => {
 
   console.log("first")
   console.log(Object.entries(chats));
+  // console.log(chats[1].date.nt);
+
 
   const handleSelectUserChat=(u)=>{
     dispatch({ type: "CHANGE_USER", payload: u });
   }  
+
+  const days=["sun","mon","tue","wed","thu","fri","sat"];
+  const months=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
 
   return (
     <div className='side'>
@@ -146,86 +154,50 @@ const Sidebar = () => {
       <div className='wrap'>
         {err && <p style={{color:'red',fontWeight:'bold'}}>Something went wrong</p>}
         
-        <div id='current'>       
-          <div style={{display:'flex',alignItems:'center',float:'left'}}>
+        <div className='current'>
+          <div className='for-content'>
             <img alt="no pic" src={currentUser.photoURL} style={{borderColor:'#0a67b8'}} />
-            <span style={{color:'greenred',fontWeight:'bold'}}>{currentUser.displayName}</span>
+            <h3 className='currentName'>{currentUser.displayName}</h3>
+            <Button variant='contained' style={{backgroundColor:'black',color:'white',margin:'2px',margin:'0px 20px',marginLeft:'40px',padding:'2px'}} onClick={handleLogout} >Logout</Button>
+            
           </div>
-            <Button variant='contained' size='small' style={{backgroundColor:'brown',color:'white',paddingRight:'10px'}} onClick={handleLogout} >Logout</Button>
         </div>
         
-        <div id='search' style={{border:'1px solid grey',borderRadius:'20px',marginTop:'6px',marginBottom:'6px',padding:'0px'}} >
-          {/* <SearchIcon /> */}
-          <input type='text' placeholder='Search user to chat..' style={{padding:'0% 1%',fontWeight:'bold',fontFamily:'cursive',height:'35px',width:'100%',outline:'none',borderRadius:'20px',border:'none'}} value={search} onKeyDown={handleKey} onChange={e=>setSearch(e.target.value)} onClick={handleClickOfsearch} />
+        <div id='search' style={{border:'1px solid #d7d7d7',borderRadius:'20px',marginTop:'6px',marginBottom:'6px',padding:'5px 0px'}} >
+          <SearchIcon style={{padding:'0px 10px'}}/>
+          <input type='text' placeholder='SEARCH' style={{padding:'0% 1%',fontWeight:'bold',fontFamily:'cursive',height:'35px',width:'100%',outline:'none',borderRadius:'20px',border:'none'}} value={search} onKeyDown={handleKey} onChange={e=>setSearch(e.target.value)} onClick={handleClickOfsearch} />
         </div>
 
         {user && <div className='Nav__item' onClick={handleSelect} style={{border:'1px solid grey',marginBottom:'3px'}}>
           <img alt="no pic" src={user.photoURL} />
           <p><b>{user.displayName}</b><br/> 
-          <span style={{color:'green',fontWeight:'bolder'}}>typing...</span></p>
+          <span style={{color:'#7dadd6',fontWeight:'bolder'}}>we can chat</span></p>
         </div>}
         {user && <hr />} 
         
         {Object.entries(chats)?.sort((user1,user2)=>user2[1].date-user1[1].date).map((chat)=>{
-          console.log(chat[1].date);
-          return (<div className='Nav__item' key={chat[0]} style={{border:'1px solid grey',marginBottom:'1px'}} onClick={()=>handleSelectUserChat(chat[1].userInfo)}>
-           <img alt="no pic" src={chat[1].userInfo.photoURL} />
-            <p> <b>{chat[1].userInfo.displayName}</b> <br/> 
-            <span style={{color:'grey',fontWeight:'bolder'}}>{chat[1].lastMessage?.text ? chat[1].lastMessage?.text.substr(0,10) : "..."}...</span></p>
-            
-            {/* <span style={{color:'green',fontWeight:'bolder'}}>typing...</span></p> */}
-        </div>)})}
-        
-        {/* <Divider /> */}
-        
-        {/* <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-clipart/20221207/ourmid/pngtree-business-man-avatar-png-image_6514640.png' />
-          <p><b>Ankit xyz</b> <br />
-          <span>Latest message</span></p>
-        </div>
-        <Divider />
+  
+          //date from firebase
+          const day=days[chat[1].date && chat[1].date.toDate().getDay()];
+          const dd=(chat[1].date && chat[1].date.toDate().getDate())
+          const mm=(chat[1].date && chat[1].date.toDate().getMonth());
+          const yy=(chat[1].date && chat[1].date.toDate().getFullYear())?.toString();
+          const tt=(chat[1].date && chat[1].date.toDate().getHours())
+          console.log(tt);
+          const dyy=(yy?.substr(2,4));
 
-        <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-clipart/20220401/ourmid/pngtree-d-rendering-gentleman-male-avatar-with-black-suit-and-red-butterfly-png-image_4521690.png' />
-          <p><b>Bsdke Xyz</b> <br/>
-          <span>Latest message</span> </p>
-        </div>
-        <Divider />
+          {/* const today=new Date();
+          const tdd=days[today.getDay()];
+          const tmm=
+          console.log(tdd); */}
+          
 
-        <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-vector/20220430/ourmid/pngtree-smiling-people-avatar-set-different-men-and-women-characters-collection-png-image_4526736.png' />
-          <p><b>Random user</b> <br />
-          <span style={{color:'green',fontWeight:'bolder'}}>typing...</span></p>
-        </div>
-        <Divider />
-
-        <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-vector/20220701/ourmid/pngtree-beautiful-muslim-hijab-girl-woman-avatar-profile-flat-icon-vector-illustration-png-image_5628400.png' />
-            <p><b>Nageswar nag</b> <br />
-            <span>Latest message</span></p>
-        </div>
-        <Divider /> */}
-        
-        {/* <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-vector/20220701/ourmid/pngtree-beautiful-muslim-hijab-girl-woman-avatar-profile-flat-icon-vector-illustration-png-image_5628400.png' />
-          <p><b>Nageswar nag</b><br />
-          <span>Latest message</span></p>
-        </div>
-        <Divider />
-        
-        <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-vector/20220701/ourmid/pngtree-beautiful-muslim-hijab-girl-woman-avatar-profile-flat-icon-vector-illustration-png-image_5628400.png' />
-          <p><b>Nageswar nag</b><br />
-          <span>Latest message</span></p>
-        </div>
-        <Divider />
-        
-        <div className='Nav__item'>
-          <img alt="no pic" src='https://png.pngtree.com/png-vector/20220701/ourmid/pngtree-beautiful-muslim-hijab-girl-woman-avatar-profile-flat-icon-vector-illustration-png-image_5628400.png' />
-          <p><b>Nageswar nag</b><br />
-          <span>Latest message</span></p>
-        </div>
-        <Divider /> */}
+          return (<div className='Nav__item' key={chat[0]} style={{marginBottom:'1px'}} >
+           {chat[1].userInfo?.photoURL && <img alt="no pic" src={chat[1].userInfo.photoURL} style={{marginLeft:'10px'}} />}
+           <p className='mname'> {chat[1].userInfo?.displayName && <b>{chat[1].userInfo.displayName}</b>} <br/> 
+            <span style={{color:'grey',fontWeight:'bolder'}}>{chat[1].lastMessage?.text ? chat[1].lastMessage?.text.substr(0,13) : "..."}</span></p>
+            <p className='ltime'>{dd}/{mm+1}/{dyy}</p>
+          </div>)})}
 
       </div>
       </div>

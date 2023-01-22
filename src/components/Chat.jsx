@@ -15,7 +15,7 @@ import { useState,useEffect } from 'react';
 import { onSnapshot } from 'firebase/firestore';
 import {db} from '../firebase';
 import { doc } from 'firebase/firestore';
-import Write from './Write'
+import Write from './Write';
 
 const Chat = () => {
   const [message,setMessage]=useState([]);
@@ -35,32 +35,32 @@ const Chat = () => {
 
   return (
     <div className='chat'>
-      <div className='top' style={{marginBottom:'10px'}}>
+      <div className='top'>
         <div className='chat-user'>
           <Avatar alt="No dp" src={data.user.photoURL} className='avatar'/>
-          <p style={{color:'white'}}>{data.user.displayName}</p>
+          <p style={{color:'white',textTransform:'capitalize'}}>{data.user.displayName}</p>
         </div>
 
         <div className='chat-media'>
-        <Tooltip title="mode" arrow>
+        {/* <Tooltip title="mode" arrow>
           <IconButton style={{color:"white"}}>
             <DarkModeIcon/>
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
 
-        <Tooltip title="voicecal" arrow>
+        <Tooltip title="not active" arrow>
           <IconButton style={{color:"white"}}>
             <LocalPhoneIcon/>
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="video call" arrow>
+        {/* <Tooltip title="video call" arrow>
           <IconButton style={{color:"white"}}>
             <VideocamIcon/>
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
 
-        <Tooltip title="more" arrow>
+        <Tooltip title="not active" arrow>
           <IconButton style={{color:"white"}}>
             <MoreVertIcon/>
           </IconButton>
@@ -68,15 +68,15 @@ const Chat = () => {
         </div> 
       </div>
 
-        <div>
-          <Write />
-        </div>
+      <div className='write-style'>
+        <Write />
+      </div>
+      
       <div className='down'>
         {message.map((message)=>{
           return (<Message message={message} key={message.id} />)
         })}                
       </div>
-      
     </div>
   )
 }

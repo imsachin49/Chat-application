@@ -1,4 +1,8 @@
 .home{
     display:grid;
     grid-template-columns: 22% 78%;
+    /* border: 10px solid red; */
+    width: 100%;
+    height: 100vh;
 }
+
